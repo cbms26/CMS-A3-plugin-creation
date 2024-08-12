@@ -2,10 +2,10 @@ name: PHP Workflow
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -28,14 +28,15 @@ jobs:
         tools: composer
 
     - name: Install dependencies
-      run: composer install --no-progress --no-suggest
+      run: |
+        composer install --no-interaction --prefer-dist --optimize-autoloader
 
     - name: Run PHP lint
       run: find . -type f -name "*.php" -exec php -l {} \;
 
     - name: Run PHPUnit tests
       run: |
-        if [ -f phpunit.xml ]; then ./vendor/bin/phpunit; fi
+        if [ -f ./vendor/bin/phpunit ]; then ./vendor/bin/phpunit --configuration phpunit.xml; fi
 
     - name: WordPress Coding Standards
       uses: wearerequired/lint-action@v1
