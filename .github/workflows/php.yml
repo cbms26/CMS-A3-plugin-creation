@@ -1,39 +1,48 @@
-name: PHP Composer
+name: PHP Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+      - main
   pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    branches: 
+      - main
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        php-version: ['7.4', '8.0', '8.1']
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
-
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
+    - name: Set up PHP ${{ matrix.php-version }}
+      uses: shivammathur/setup-php@v2
       with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+        php-version: ${{ matrix.php-version }}
+        tools: composer
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer install --no-progress --no-suggest
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+    - name: Run PHP lint
+      run: find . -type f -name "*.php" -exec php -l {} \;
 
-    # - name: Run test suite
-    #   run: composer run-script test
+    - name: Run PHPUnit tests
+      run: |
+        if [ -f phpunit.xml ]; then ./vendor/bin/phpunit; fi
+
+    - name: WordPress Coding Standards
+      uses: wearerequired/lint-action@v1
+      with:
+        phpcs: true
+        paths: |
+          ./includes
+          ./admin-notification-manager.php
+      env:
+        PHPCS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
