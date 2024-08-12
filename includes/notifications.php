@@ -41,10 +41,7 @@ function adn_display_admin_notice() {
 }
 add_action('admin_notices', 'adn_display_admin_notice');
 
-// ================================
-// Delete Notification Section
-// ================================
-
+//Deleting saved notifications befreo its due date
 function adn_delete_notification() {
     if (isset($_POST['adn_delete'])) {
         $notifications = get_option('adn_notifications', []);
