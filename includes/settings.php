@@ -10,12 +10,12 @@ function adn_settings_page() {
             'start_date' => sanitize_text_field($_POST['adn_start_date']),
             'end_date' => sanitize_text_field($_POST['adn_end_date']),
             'roles' => $_POST['adn_roles'],
-            'user_id' => get_current_user_id() // Store the current user ID
+            'user_id' => get_current_user_id() // Store the current user ID to enable delete notifcation later
         ];
         $notifications[] = $new_notification;
         update_option('adn_notifications', $notifications);
 
-        // Optionally send the notification to an external API (if needed)
+        // Optionally send the notification to an external API (if apllicable)
         adn_send_notification_to_api($new_notification);
     }
 
@@ -35,7 +35,7 @@ function adn_settings_page() {
     <div class="wrap">
         <h1>Admin Dashboard Notifications</h1>
 
-        <!-- Notification Settings Section -->
+        <!-- Notification Settings Section from frontend -->
         <h2>Notification Settings</h2>
         <form method="post" action="">
             <table class="form-table">
@@ -73,7 +73,7 @@ function adn_settings_page() {
             <input type="submit" name="adn_save" class="button-primary" value="Save Notification" />
         </form>
 
-        <!-- API Settings Section -->
+        <!-- API Settings Section from frontened -->
         <h2>API Settings and Action</h2>
         <form method="post" action="">
             <table class="form-table">
@@ -82,7 +82,7 @@ function adn_settings_page() {
                     <td><input type="text" name="adn_api_endpoint" value="<?php echo esc_attr($saved_api_endpoint); ?>" /></td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">API Key</th>
+                    <th scope="row">API Key (if applicable)</th>
                     <td><input type="text" name="adn_api_key" value="<?php echo esc_attr($saved_api_key); ?>" /></td>
                 </tr>
             </table>

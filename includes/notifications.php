@@ -4,6 +4,7 @@
 // Admin Notifications Display and Delete Section
 // ================================
 
+//function to display admin notification
 function adn_display_admin_notice() {
     $notifications = get_option('adn_notifications', []);
 
@@ -13,7 +14,7 @@ function adn_display_admin_notice() {
             $roles = $notification['roles'];
             $display = false;
 
-            // Check if the current user's role is included in the notification roles
+            // Check if the current user's role is included in the notification roles to be able to delete later
             foreach ($current_user->roles as $role) {
                 if (in_array($role, $roles)) {
                     $display = true;
@@ -26,7 +27,7 @@ function adn_display_admin_notice() {
                 echo '<div class="' . esc_attr($notification['type']) . ' notice is-dismissible">';
                 echo '<p>' . esc_html($notification['message']) . '</p>';
 
-                // Display delete button only for the user who created it
+                // allow delete button only for the user who created it
                 if ($current_user->ID == $notification['user_id']) {
                     echo '<form method="post" action="" style="display:inline;">';
                     echo '<input type="hidden" name="adn_delete" value="' . $index . '" />';
@@ -93,7 +94,7 @@ function adn_fetch_api_notifications($api_endpoint, $api_key) {
                 if (is_array($notification) && isset($notification['title']) && isset($notification['body'])) {
                     $title = $notification['title'];
                     $message = $notification['body'];
-                    $type = 'notice-info'; // Use a generic type for all notifications
+                    $type = 'notice-info'; // Use a generic data type for all notifications to be displayed, currently has title and body
 
                     echo '<div class="' . esc_attr($type) . ' notice is-dismissible">';
                     echo '<p><strong>' . esc_html($title) . ':</strong> ' . esc_html($message) . '</p>';
