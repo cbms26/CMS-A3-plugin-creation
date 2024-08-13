@@ -89,4 +89,4 @@ Contributions are welcomed and Please fork this repository and submit a pull req
 
 ---
 
-**Note:** This plugin is developed as part of a CMS assignment. It is designed to be easily extended and customized for various use cases within WordPress admin site.
+_**Note:** This plugin is developed as part of a CMS assignment. It is designed to be easily extended and customized for various use cases within WordPress admin site._
