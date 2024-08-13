@@ -1,8 +1,8 @@
 # Admin Notification Manager Plugin
 
 [![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)](https://wordpress.org/plugins/)
-[![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)](https://php.net/)
+[![CI Status](https://github.com/cbms26/CMS-A3-plugin-creation/actions/workflows/php.yml/badge.svg)](https://github.com/cbms26/CMS-A3-plugin-creation)
 
 ## Overview
 
@@ -16,10 +16,21 @@ The **Admin Notification Manager Plugin** is a WordPress plugin designed to mana
 - **User-Friendly Interface:** Simple and intuitive UI for managing notifications directly within the WordPress admin dashboard.
 - **Extensible:** Designed for easy customization and future enhancements, including potential frontend display capabilities.
 
+## Continuous Integration (CI)
+
+This repository uses GitHub Actions for Continuous Integration (CI) to ensure that all code changes are tested and meet the project's quality standards before being merged into the main branch. The CI pipeline is configured to run on every push and pull request to the `main` branch and includes the following steps:
+
+- **PHP Linting:** Checks for syntax errors in all PHP files.
+- **PHPUnit Testing:** Runs automated tests using PHPUnit to verify that the plugin functions as expected.
+- **WordPress Coding Standards:** Validates that the code follows WordPress coding standards using PHPCS.
+
+The status of the latest build can be viewed here: [![CI Status](https://github.com/cbms26/CMS-A3-plugin-creation/actions/workflows/php.yml/badge.svg)](https://github.com/cbms26/CMS-A3-plugin-creation)
+
 ## Installation
 
 1. **Download the Plugin:**
    - Clone or download the plugin from this repository.
+   - You can also fork the repository to make changes.
 
 2. **Upload to WordPress:**
    - Upload the plugin files to the `/wp-content/plugins/admin-notification-manager/` directory or install it via the WordPress plugin repository.
@@ -64,7 +75,7 @@ The **Admin Notification Manager Plugin** is a WordPress plugin designed to mana
 
 ## Contributing
 
-Contributions are welcome! Please fork this repository and submit a pull request. Ensure your code follows WordPress coding standards.
+Contributions are welcomed and Please fork this repository and submit a pull request. Ensure your code follows WordPress coding standards.
 
 ### Development Notes
 
@@ -76,14 +87,6 @@ Contributions are welcome! Please fork this repository and submit a pull request
 
 - **Testing:** It’s recommended to use PHPUnit for testing any modifications. Ensure that any new features are covered with appropriate test cases to maintain the integrity of the plugin.
 
-## License
-
-This plugin is licensed under the GPL v2 or later. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For support or inquiries, please contact [Your Name] at [your-email@example.com].
-
 ---
 
-**Note:** This plugin is developed as part of a course project. It is designed to be easily extended and customized for various use cases within WordPress.
+**Note:** This plugin is developed as part of a CMS assignment. It is designed to be easily extended and customized for various use cases within WordPress admin site.
